@@ -16,28 +16,16 @@ class VisiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Visite::class);
     }
 
-    //    /**
-    //     * @return Visite[] Returns an array of Visite objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('v.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Visite
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Retourne toutes les visites triées sur un champ
+     * @param type $champ
+     * @param type $ordre
+     * @return Visite[]
+     */
+    public function findAllOrderBy($champ, $ordre): array{
+        return $this->createQueryBuilder('v') // permet de créer une requête de type "select"
+                ->orderBy('v.'.$champ, $ordre)  // ajoute l'ordre "ORDER BY" dans la requête
+                ->getQuery()    // permet d'exécuter la requête
+                ->getResult();  // permet de récupérer le résultat de la requête sous forme de tableau
+    }
 }
